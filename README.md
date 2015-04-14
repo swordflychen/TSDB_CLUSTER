@@ -182,4 +182,4 @@ tsdb: time series database.
 * swordflychen@gmail.com
 
 ### 12. TODO
-* TODO
+* todo
