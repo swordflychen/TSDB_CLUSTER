@@ -1,4 +1,0 @@
-
-====================== decode url ==========================
-decode_url.lua:
-	该文件主要功能是从TSDB中获取某个时间段内的URL数据，然后进行解析，最终得到GPS数据和GSENSOR数据，然后将GPS和GSENSOR数据写入到redis中。
