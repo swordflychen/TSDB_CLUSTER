@@ -1,0 +1,21 @@
+Regression test
+==============
+* use redis.lua
+
+run test
+==============
+* ./run.sh
+
+test features
+==============
+* set
+* get
+* mset
+* exists
+* lrange
+* del
+
+
+
+
+--07-02-2014--

@@ -1,0 +1,31 @@
+{
+        "node_type": "SINGLE",
+        "mode": "RW",
+        "ds_id": 10086,
+        "key_set": [0, 2048],
+        "time_range": [20120101000000, -1],
+        "zk_server": "192.168.1.14:2181,192.168.1.14:2182,192.168.1.14:2183,192.168.1.14:2184,192.168.1.14:2185",
+        
+        "ip": "192.168.11.155",
+        "w_port": 7503,
+        "r_port": 7504,
+
+        "max_connect": 100,
+        "num_threads": 8,
+
+        "work_path": "./var2",
+        "log_path": "./var2/logs",
+        "log_file": "access",
+        "log_level": 5,
+
+        "ldb_write_buffer_size": 67108864,
+        "ldb_block_size": 32768,
+        "ldb_cache_lru_size": 1073741824,
+        "ldb_bloom_key_size": 10,
+        "ldb_compaction_speed": 1000,
+
+        "has_slave": 1,
+        "role": "SLAVE",
+        "slave_ip": "192.168.11.153",
+        "slave_wport": 7501
+}

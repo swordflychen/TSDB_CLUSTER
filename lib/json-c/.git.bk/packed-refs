@@ -1,0 +1,10 @@
+# pack-refs with: peeled 
+4e2da95617fa4fb7c71aaa28ed7639408af504fa refs/remotes/origin/gh-pages
+5c2a69a8b8f863d057067b69e2658ef480eb1987 refs/remotes/origin/json-c-0.10
+97ef11033a39d85752d2fb262f2aae5712504fb2 refs/remotes/origin/json-c-0.11
+8ce53f9d1e019995e3e08b20112b88b0262dc883 refs/remotes/origin/kdopen-rename_library
+06450206c4f3de4af8d81bb6d93e9db1d5fedec1 refs/remotes/origin/master
+263f6e71d51af978cf277666b38864e18ce2bf57 refs/tags/json-c-0.10-20120530
+^b7cfd1570576fe62817e4743de484b5591d7ad36
+a4732836eadde8b81ca61fb9eb3b0c518c52e7d2 refs/tags/json-c-0.11-20130402
+^97ef11033a39d85752d2fb262f2aae5712504fb2

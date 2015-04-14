@@ -1,0 +1,55 @@
+------------------
+Enjoy the coding !
+------------------
+
+2015-02-03: timport: fix bug: memory leaks.
+2015-01-26: fix bug: sync: value size out of range.
+2015-01-20: timport: support multi tsdb instance  
+2014-12-18: timport: fix warning and urllog format error
+2014-12-16: timport: optimize and write statistics
+2014-12-15: limit backup file size < 10GB
+2014-12-10: optimize code
+2014-12-04: update config
+2014-12-01: update test program
+2014-11-30: add new module: timport -- migration program
+2014-11-20: add new feature: heartbeat
+2014-11-07: fix some bugs
+2014-11-05: upgrade some deps libs
+2014-10-24: update info-cmd
+2014-10-21: add new cmd-compact
+2014-10-19: add new feature: limit compaction
+2014-10-16: fix bugs: sync abort / cmd-info
+2014-09-25: update config: cfg file and code
+2014-09-24: add new feature: add node role name in znode name 
+2014-09-22: fix bug:
+2014-09-15: update luazk-module
+2014-09-10: fix bug: memory leak in binlog
+2014-09-07: update TODO and README
+2014-09-02: fix bug: leveldb file size out of range
+2014-08-30: fix bug: binlog
+2014-08-20: add TODO something
+2014-08-18: fix bug: deal recv return 0
+2014-08-15: tsdb 1.2.1 beta
+2014-08-15: add new feature: maste-slave sync
+2014-08-15: tsdb 1.1.1 beta
+2014-08-11: add new feature: binlog
+2014-08-06: update: meta-data mechnism
+2014-07-31: fix bug: logger module
+2014-07-26: modify pid file -> tsdb.pid
+2014-07-22: add luazk-module
+2014-07-10: add benchmark test
+2014-07-09: add new feature: cmd-values, use it be caution
+2014-07-02: fix bugs: cmd-lrange response null-value format
+2014-07-02: add regression test
+2014-07-01: add new logger
+2014-06-28: add new cmd-ping and cmd-exists
+2014-06-18: fix cmd-info implement
+2014-06-13: add new feature: local cache meta-data
+2014-06-06: decent exit
+2014-06-04: fig bugs: log format / recieve signal of 'kill' and 'ctrl-c'
+2014-05-28: fix string match strategy of cmd-keys
+2014-05-27: add zookeeper lua library for data_integration_module
+2014-05-23: add features of tsdb's cluster
+2014-05-23: add static library -- snappy
+2014-05-22: fix bugs: protocal error / integer overflow...
+2014-05-06: tsdb 1.0 alpha release

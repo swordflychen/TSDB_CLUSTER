@@ -1,0 +1,60 @@
+TSDB TODO
+=========
+
+以下是可能需要考虑的问题
+---------
+
+
+### 0. log 可以优化：提出来放到logger.h
+    done.
+
+### 1. 程序友好的退出
+    done.
+
+### 2. 测试：
+    1) regression test: done
+    2) bentch test: done
+
+### 3. 用jemallc 或是 tcmalloc 性能是不是有提高呢？
+
+### 4. 客户端程序支持
+* 目前采用的是 redis 协议，所有 redis 客户端都可以用，只是有的命令不支持
+
+### 5. pidfile 不好看  
+    done
+
+### 6. 主备服务器的数据同步方式，binlog or others: binlog done.
+
+### 7. lrange prefix ts1 ts2 有时候查不出来数据，不知道为什么？（2014-6-16）
+    done. 忘记初始化回收的nodedata。
+
+### 8. 事件loop退出慢:done.
+
+### 9. ping
+    done.
+
+### 10. exists 
+    done.
+### 11. 并发量只能达到3000，优化网络模型
+
+### 12. slow log:
+    在命令执行前记录一下执行时间，执行之后记录一下执行时间，如果时间花费很多就将该条命令记录到慢查询日志；
+
+### 13. dep libs upgrade.
+    snappy-1.1.1 -> snappy-1.1.2
+    json-c-0.11  -> json-c-0.12
+     
+### 14. 是否实现这种架构（需要确认）：done.
+    1) master ---> slave ---> slave
+    2)           /--> slave
+       master-->|---> slave
+                 \--> slave
+### 15. 展示binlog及其同步情况；
+
+### 16. compact limit speed: done
+
+### 17. sync checksum
+
+### 18. heart beat: done
+
+### 19. optimized sync mechnism
