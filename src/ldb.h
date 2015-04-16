@@ -1,3 +1,10 @@
+/*
+ * ldb.h
+ *
+ *  Created on: May 24, 2014
+ *      Author: chenjianfei
+ */
+
 #pragma once
 
 #include <stdio.h>
