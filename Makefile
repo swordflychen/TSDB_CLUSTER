@@ -61,7 +61,6 @@ mc:
 push:
 	git push -u origin master
 
-
 clean:
 	rm -f $(TARGET)
 	rm -rf $(OBJ_DIR)/*.o
