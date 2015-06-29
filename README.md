@@ -180,6 +180,7 @@ tsdb: time series database.
 
 ### 11. Author
 * swordflychen@gmail.com
+* cjfeii@126.com
 
 ### 12. TODO
 * todo
