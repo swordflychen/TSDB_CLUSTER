@@ -1,3 +1,10 @@
+/*
+ * file: ctl.h
+ * auth: cjfeii@126.com
+ * date: Aug 8, 2014
+ * desc: control process.
+ */
+
 #pragma once
 
 #include "main.h"

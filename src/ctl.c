@@ -1,3 +1,10 @@
+/*
+ * file: ctl.c
+ * auth: cjfeii@126.com
+ * date: Aug 8, 2014
+ * desc: control process.
+ */
+
 #include <string.h>
 
 #include "ctl.h"

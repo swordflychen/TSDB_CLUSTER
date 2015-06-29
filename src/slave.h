@@ -1,8 +1,8 @@
 /*
  * file: slave.h
- * auth: chenjianfei@daoke.me
+ * auth: cjfeii@126.com
  * date: Aug 11, 2014
- * desc: 
+ * desc: slave opetator.
  */
 
 #pragma once

@@ -1,3 +1,10 @@
+/*
+ * file: utils.h
+ * auth: cjfeii@126.com
+ * date: Aug 8, 2014
+ * desc: utils.
+ */
+
 #pragma once
 
 //#define GET_NEED_COUNT(idx, div)	( (idx) / (div) + ( (idx) % (div) >= 1 )? 1 : 0 )  --> it's error, this result allway is 0 or 1

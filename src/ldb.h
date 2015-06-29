@@ -1,8 +1,8 @@
 /*
- * ldb.h
- *
- *  Created on: May 24, 2014
- *      Author: chenjianfei
+ * file: ldb.h
+ * auth: cjfeii@126.com
+ * date: Aug 8, 2014
+ * desc: level db acess.
  */
 
 #pragma once

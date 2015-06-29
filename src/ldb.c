@@ -1,3 +1,10 @@
+/*
+ * file: ldb.c
+ * auth: cjfeii@126.com
+ * date: Aug 8, 2014
+ * desc: level db acess.
+ */
+
 #include <string.h>
 #include <unistd.h>
 #include <ftw.h>

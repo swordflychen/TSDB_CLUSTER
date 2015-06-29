@@ -1,3 +1,10 @@
+/*
+ * file: read_cfg.c
+ * auth: cjfeii@126.com
+ * date: Aug 8, 2014
+ * desc: read configure file.
+ */
+
 #include <stdlib.h>
 #include <string.h>
 #include <json.h>

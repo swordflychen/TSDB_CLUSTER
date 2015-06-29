@@ -1,12 +1,11 @@
 /*
- * zk.h
- *
- *  Created on: May 24, 2014
- *      Author: chenjianfei
+ * file: zk.h
+ * auth: cjfeii@126.com
+ * date: Aug 8, 2014
+ * desc: zookeeper access.
  */
 
 #pragma once
-
 
 /*
  * initial a zk server.

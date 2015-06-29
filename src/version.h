@@ -1,8 +1,8 @@
 /*
- * version.h
- *
- *  Created on: Apr 15, 2014
- *      Author: chenjianfei
+ * file: version.h
+ * auth: cjfeii@126.com
+ * date: Aug 8, 2014
+ * desc: version define.
  */
 
 #pragma once

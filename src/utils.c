@@ -1,3 +1,10 @@
+/*
+ * file: utils.c
+ * auth: cjfeii@126.com
+ * date: Aug 8, 2014
+ * desc: utils.
+ */
+
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>

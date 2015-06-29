@@ -1,5 +1,8 @@
 /*
- * a simple server use libev
+ * file: main.c
+ * auth: cjfeii@126.com
+ * date: Aug 8, 2014
+ * desc: a simple server use libev
  */
 
 #define _GNU_SOURCE             /* See feature_test_macros(7) */

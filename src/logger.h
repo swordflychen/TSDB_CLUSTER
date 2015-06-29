@@ -1,8 +1,8 @@
 /*
  * file: logger.h
- * auth: chenjianfei@daoke.me
+ * auth: cjfeii@126.com
  * date: Jun 30, 2014
- * desc:
+ * desc: logger.
  */
 
 #pragma once

@@ -1,8 +1,8 @@
 /*
  * file: binlog.h
- * auth: chenjianfei@daoke.me
+ * auth: cjfeii@126.com
  * date: Aug 8, 2014
- * desc: 
+ * desc: binary log for sync.
  */
 
 #pragma once

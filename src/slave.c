@@ -1,8 +1,8 @@
 /*
  * file: slave.c
- * auth: chenjianfei@daoke.me
+ * auth: cjfeii@126.com
  * date: Aug 11, 2014
- * desc: Slave thread: sync with slave.
+ * desc: slave opetator.
  */
 
 #include <arpa/inet.h>

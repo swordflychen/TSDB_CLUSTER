@@ -1,8 +1,8 @@
 /*
- * main.h
- *
- *  Created on: May 24, 2014
- *      Author: chenjianfei
+ * file: main.h
+ * auth: cjfeii@126.com
+ * date: Aug 8, 2014
+ * desc: a simple server use libev
  */
 
 #pragma once
