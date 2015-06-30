@@ -2,7 +2,7 @@
  * file: binlog.h
  * auth: cjfeii@126.com
  * date: Aug 8, 2014
- * desc: binary log for sync.
+ * desc: binary log for sync. not thread-safe.
  */
 
 #pragma once
@@ -24,6 +24,8 @@ typedef struct _binlog
     uint64_t min_seq;
     uint64_t cur_seq;
     uint64_t last_seq;
+    
+    uint64_t batch_cnt;
 } binlog_t;
 
 typedef struct _bl_buffer
@@ -40,7 +42,7 @@ typedef struct _bl_buffer
 } bl_buf_t;
 
 /*
- * initial/close binlog.
+ * open & close binlog.
  */
 int binlog_open(struct _leveldb_stuff *ldbs, uint8_t is_log);
 void binlog_close(void);

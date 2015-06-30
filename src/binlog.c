@@ -32,6 +32,7 @@ static inline uint64_t big_endian_u64(uint64_t v){
     return big_endian_u32(h) | ((uint64_t)big_endian_u32(l) << 32);
 }
 
+/* encode binlog-key with sequential number. */
 static inline size_t encode_seq_key(uint64_t seq, char *key)
 {
     size_t len = sizeof(uint64_t) + 1;
@@ -43,6 +44,7 @@ static inline size_t encode_seq_key(uint64_t seq, char *key)
     return len;
 }
 
+/* decode sequential number from binlog-key. */
 static inline uint64_t decode_seq_key(const char *key, size_t klen)
 {
     if (klen != sizeof(uint64_t) + 1) {
@@ -51,6 +53,7 @@ static inline uint64_t decode_seq_key(const char *key, size_t klen)
     return big_endian_u64(*(uint64_t *)(key + 1));
 }
 
+/* encode binlog-value with sequential number, record-key, op-command.  */
 static inline size_t encode_seq_value(const char *val, size_t val_len, uint64_t seq, char cmd, char *seq_val)
 {
     size_t seq_val_len = 1 + val_len;
@@ -60,7 +63,7 @@ static inline size_t encode_seq_value(const char *val, size_t val_len, uint64_t 
     return seq_val_len;
 }
 
-/* need free(*val). */
+/* decode binlog-value. */
 static inline size_t decode_seq_value(const char *seq_val, size_t seq_val_len, char *val, char *cmd)
 {
     if (seq_val_len < 1) {
@@ -83,6 +86,7 @@ int binlog_open(struct _leveldb_stuff *ldbs, uint8_t is_log)
     binlog = (binlog_t *) malloc (sizeof(binlog_t));
     binlog->min_seq = 0;    /* FIXME */
     binlog->last_seq = 1;
+    binlog->batch_cnt = 0;
 
     bl_buf = (bl_buf_t *) malloc (sizeof(bl_buf_t));
     const char *tmp_key;
@@ -132,7 +136,7 @@ int binlog_put(struct _leveldb_stuff *ldbs, const char *key, size_t klen, const 
     char *err = NULL;
 
     if (binlog != NULL) {
-        /* write log. */
+        /* write binlog. */
         uint64_t seq = binlog->last_seq + 1;
         bl_buf->wk_len = encode_seq_key(seq, bl_buf->w_key);
         bl_buf->wv_len = encode_seq_value(key, klen, seq, CMD_SET, bl_buf->w_val);
@@ -140,7 +144,7 @@ int binlog_put(struct _leveldb_stuff *ldbs, const char *key, size_t klen, const 
         leveldb_writebatch_put(ldbs->wbatch, bl_buf->w_key, bl_buf->wk_len, bl_buf->w_val, bl_buf->wv_len);
     }
 
-    /* write kv-data. */
+    /* write record data. */
     leveldb_writebatch_put(ldbs->wbatch, key, klen, value, vlen);
     leveldb_write(ldbs->db, ldbs->woptions, ldbs->wbatch, &err);
     leveldb_writebatch_clear(ldbs->wbatch);
@@ -165,7 +169,7 @@ int binlog_delete(struct _leveldb_stuff *ldbs, const char *key, size_t klen)
     char *err = NULL;
 
     if (binlog != NULL) {
-        /* write log. */
+        /* write binlog. */
         uint64_t seq = binlog->last_seq + 1;
         bl_buf->wk_len = encode_seq_key(seq, bl_buf->w_key);
         bl_buf->wv_len = encode_seq_value(key, klen, seq, CMD_DEL, bl_buf->w_val);
@@ -173,7 +177,7 @@ int binlog_delete(struct _leveldb_stuff *ldbs, const char *key, size_t klen)
         leveldb_writebatch_put(ldbs->wbatch, bl_buf->w_key, bl_buf->wk_len, bl_buf->w_val, bl_buf->wv_len);
     }
 
-    /* delete kv-data. */
+    /* delete record data. */
     leveldb_writebatch_delete(ldbs->wbatch, key, klen);
     leveldb_write(ldbs->db, ldbs->woptions, ldbs->wbatch, &err);
     leveldb_writebatch_clear(ldbs->wbatch);
@@ -196,13 +200,17 @@ int binlog_delete(struct _leveldb_stuff *ldbs, const char *key, size_t klen)
 int binlog_batch_put(struct _leveldb_stuff *ldbs, const char *key, size_t klen, const char *value, size_t vlen)
 {
     if (binlog != NULL) {
-        /* write log. */
+        /* write binlog. */
         uint64_t seq = ++ binlog->last_seq;
         bl_buf->wk_len = encode_seq_key(seq, bl_buf->w_key);
         bl_buf->wv_len = encode_seq_value(key, klen, seq, CMD_SET, bl_buf->w_val);
 
         leveldb_writebatch_put(ldbs->wbatch, bl_buf->w_key, bl_buf->wk_len, bl_buf->w_val, bl_buf->wv_len);
+
+        ++ binlog->batch_cnt;
     }
+
+    /* write record data. */
     leveldb_writebatch_put(ldbs->wbatch, key, klen, value, vlen);
     return 0;
 }
@@ -210,14 +218,17 @@ int binlog_batch_put(struct _leveldb_stuff *ldbs, const char *key, size_t klen, 
 int binlog_batch_delete(struct _leveldb_stuff *ldbs, const char *key, size_t klen)
 {
     if (binlog != NULL) {
-        /* write log. */
-        // TODO
+        /* write binlog. */
         uint64_t seq = ++ binlog->last_seq;
         bl_buf->wk_len = encode_seq_key(seq, bl_buf->w_key);
         bl_buf->wv_len = encode_seq_value(key, klen, seq, CMD_DEL, bl_buf->w_val);
 
         leveldb_writebatch_put(ldbs->wbatch, bl_buf->w_key, bl_buf->wk_len, bl_buf->w_val, bl_buf->wv_len);
+
+        -- binlog->batch_cnt;
     }
+
+    /* delete record data. */
     leveldb_writebatch_delete(ldbs->wbatch, key, klen);
     return 0;
 }
@@ -233,6 +244,13 @@ int binlog_batch_commit(struct _leveldb_stuff *ldbs)
         err = NULL;
         return -1;
     } else {
+        /* FIXME: need notify slave thread to sync. */
+        /* notify slave thread to sync. */
+        if (binlog != NULL) {
+            binlog->last_seq += binlog->batch_cnt;
+            binlog->batch_cnt = 0;
+        }
+
         return 0;
     }
 }
