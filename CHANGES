@@ -2,6 +2,7 @@
 Enjoy the coding !
 ------------------
 
+2015-06-30: tsdb: fix bug:batch write not sync to slave .
 2015-02-03: timport: fix bug: memory leaks.
 2015-01-26: fix bug: sync: value size out of range.
 2015-01-20: timport: support multi tsdb instance  
