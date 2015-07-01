@@ -84,7 +84,7 @@ void set_log_level(int level);
 #define log_out(fmt, args...) \
     fprintf(stderr, "[OUT  ]%16s(%4d): " fmt "\n", __FILE__, __LINE__, ##args)
 
-#if OPEN_DEBUG /* print log to std-output. */
+#if OPEN_DEBUG /* print log to stderr. */
 
 #define D_LOG   "[DEBUG]"
 #define I_LOG   "[INFO ]"
