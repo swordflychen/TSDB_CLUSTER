@@ -14,6 +14,7 @@
 
 #include "leveldb/c.h"
 
+#define DEFAULT_DBNAME_SIZE 1024
 #define SOME_KV_NODES_COUNT 1024
 
 struct kv_node {
@@ -38,15 +39,12 @@ struct kv_list {
     struct some_kv head;
 };
 
-//#define DEFAULT_DBNAME_SIZE 200
-#define DEFAULT_DBNAME_SIZE 1024
-
 struct _leveldb_stuff {
     leveldb_t* db;
     leveldb_options_t *options;
     leveldb_readoptions_t *roptions;
     leveldb_writeoptions_t *woptions;
-    leveldb_writebatch_t *wbatch;       // not safe.
+    leveldb_writebatch_t *wbatch;       // not thread-safe.
     char dbname[DEFAULT_DBNAME_SIZE];
 };
 

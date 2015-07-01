@@ -17,18 +17,20 @@ extern short LDB_READONLY_SWITCH;
 
 static struct _leveldb_stuff *g_ldb= NULL;
 
-/***********Sync*************/
+/* sync cmd code. */
 #define LDB_SYNCSET     1556657827
 #define LDB_SYNCSET_CNT 3
 #define LDB_SYNCDEL     1556647679
 #define LDB_SYNCDEL_CNT 2
-/************W***************/
+
+/* update cmd code. */
 #define LDB_SET         12291
 #define LDB_SET_CNT     3
 #define LDB_DEL         2143
 #define LDB_DEL_MIN     2
 #define LDB_MSET        223203
-/************R***************/
+
+/* query cmd code. */
 #define LDB_GET         4179
 #define LDB_GET_CNT     2
 #define LDB_LRANGE      138472676
@@ -43,12 +45,14 @@ static struct _leveldb_stuff *g_ldb= NULL;
 #define LDB_EXISTS_CNT  2
 #define LDB_COMPACT     789918239
 #define LDB_COMPACT_CNT 1
-/************O***************/
+
+/* close connect cmd code. */
 #define LDB_QUIT        294963
-/***********TEST*************/
+
+/* filter values cmd code. */
+/* for test. */
 #define LDB_VALUES      249715874
 #define LDB_VALUES_CNT  2
-/************P***************/
 
 static char *x_strstr(const char *s1, const char *s2, int size)
 {
@@ -133,7 +137,7 @@ int ctl_cmd_parse(struct data_node *p_node)
             p_node->kvs = atoi( p_old );
             p_node->doptr = p_new - data;
         }
-        // 2. read the request name
+        // 2. read the command name
         if (p_node->cmd == 0){
             if (data[ p_node->doptr ] != '$'){
                 goto E_OUT_PUT;
@@ -162,9 +166,7 @@ int ctl_cmd_parse(struct data_node *p_node)
                 PARSE_MEMBER(p_node->key, p_node->klen);
                 PARSE_LEN(p_node->vlen);
                 PARSE_MEMBER(p_node->val, p_node->vlen);
-//                x_out_time(&g_dbg_time);
                 ok = ldb_put(g_ldb, &data[ p_node->key ], p_node->klen, &data[ p_node->val ], p_node->vlen);
-//                x_out_time(&g_dbg_time);
                 goto W_OUT_PUT;
 
             case LDB_DEL:

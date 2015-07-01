@@ -32,13 +32,27 @@
 #define X_ERROR_CMD         -3
 #define X_ERROR_LDB         -4
 
+/*
+ * initial ldb. 
+ */
+int ctl_ldb_init(char *db_name);
 
-extern int ctl_ldb_init(char *db_name);
+/*
+ * close ldb.
+ */
+int ctl_ldb_close(void);
 
-extern int ctl_ldb_close(void);
+/*
+ * parse command.
+ */
+int ctl_cmd_parse(struct data_node *p_node);
 
-extern int ctl_cmd_parse(struct data_node *p_node);
+/*
+ * free resoruce.
+ */
+int ctl_cmd_done(struct data_node *p_node);
 
-extern int ctl_cmd_done(struct data_node *p_node);
-
-extern int ctl_status_clean(struct data_node *p_node);
+/*
+ * clean data_node status.
+ */
+int ctl_status_clean(struct data_node *p_node);

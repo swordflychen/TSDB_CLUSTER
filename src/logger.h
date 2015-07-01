@@ -19,6 +19,8 @@
 #include <sys/stat.h>
 #include <unistd.h>
 
+
+/* log level. */
 enum
 {
     LEVEL_NONE = (-1),
@@ -32,6 +34,7 @@ enum
     LEVEL_MAX = 5,
 };
 
+/* this is color theme. */
 #define NONE            "\x1B[m"
 #define GRAY            "\x1B[0;30m"
 #define LIGHT_GRAY      "\x1B[1;30m"
@@ -70,14 +73,18 @@ int log_write(int level, const char *fmt, ...);
  */
 void set_log_level(int level);
 
+/*
+ * for dubug: print time to std-output.
+ */
 #define x_out_time(x) { gettimeofday( ((struct timeval *)x), NULL ); \
     printf("time: %ld.%ld s\n", ((struct timeval *)x)->tv_sec, ((struct timeval *)x)->tv_usec); }
-
+/*
+ * for dubug: print log to std-output.
+ */
 #define log_out(fmt, args...) \
     fprintf(stderr, "[OUT  ]%16s(%4d): " fmt "\n", __FILE__, __LINE__, ##args)
 
-
-#if OPEN_DEBUG
+#if OPEN_DEBUG /* print log to std-output. */
 
 #define D_LOG   "[DEBUG]"
 #define I_LOG   "[INFO ]"
@@ -99,7 +106,7 @@ void set_log_level(int level);
 #define log_fatal(fmt, args...) \
     fprintf(stderr, "[FATAL]%16s(%4d): " fmt "\n", __FILE__, __LINE__, ##args)
 
-#else
+#else /* print log to log-file. */
 
 #define D_LOG   LEVEL_DEBUG
 #define I_LOG   LEVEL_INFO

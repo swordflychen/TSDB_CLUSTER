@@ -7,7 +7,7 @@
 
 #include "logger.h"
 
-typedef struct log_context
+typedef struct _log_context
 {
     int32_t level;
     FILE* fp;
@@ -19,9 +19,10 @@ typedef struct log_context
         uint64_t w_curr;
         uint64_t w_total;
     } stats;
-} LogContext;
+} log_context_t;
 
-static LogContext g_log_context;
+
+static log_context_t g_log_context;
 
 int32_t open_log(const char *filename, int32_t level, int8_t is_threadsafe, uint64_t rotate_size)
 {
