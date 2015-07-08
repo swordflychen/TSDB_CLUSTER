@@ -13,20 +13,11 @@ INC_DIR=-I./lib/libev-4.15 \
 
 LIB_DIR=./lib
 
-USE=LIBA
-ifeq ($(USE),LIBA)
-LIBS=-lpthread -lstdc++ -lm
-else
-LIBS=-lpthread -lrt -lm
-endif
-
+LIBS=-lpthread -lstdc++ -lm -lrt
 LIBA=-lev -ljson-c -lleveldb -lsnappy -lzookeeper_mt
-#CFLAGS=-Wall -g -DOPEN_PTHREAD -DOPEN_STATIC -DOPEN_COMPRESSION -DOPEN_DEBUG \
-       #-DSYNC_PUT -DOPEN_TIME_OUT -static-libgcc -static-libstdc++
 
-CFLAGS=-Wall -O2 -DOPEN_PTHREAD -DOPEN_STATIC -DOPEN_COMPRESSION \
-       #-DSYNC_PUT -DOPEN_TIME_OUT -static-libgcc -static-libstdc++
-
+CFLAGS=-Wall -g -DOPEN_PTHREAD -DOPEN_STATIC -DOPEN_COMPRESSION -DOPEN_DEBUG
+#CFLAGS=-Wall -O2 -DOPEN_PTHREAD -DOPEN_STATIC -DOPEN_COMPRESSION
 
 OBJ = $(addprefix $(OBJ_DIR)/, \
       ldb.o \
@@ -63,7 +54,7 @@ push:
 
 clean:
 	rm -f $(TARGET)
-	rm -rf $(OBJ_DIR)/*.o
+	rm -rf $(OBJ_DIR)
 	@-if [ ! -d $(OBJ_DIR) ];then mkdir $(OBJ_DIR); fi
 
 distclean:
