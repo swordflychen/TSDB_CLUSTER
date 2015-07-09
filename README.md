@@ -19,7 +19,7 @@ tsdb: time series database.
 * info ：返回关于 TSDB 服务器的各种信息和统计数值；
 * ping ：判断链接是否正常；
 * exists key：判断 key 是否存在。
-* compact
+* compact ：数据库整合。
 
 ### 2. 安装说明：
 * 安装依赖的库（需要 sudoer 权限）：
