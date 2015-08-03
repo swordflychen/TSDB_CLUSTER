@@ -23,28 +23,42 @@ tsdb: time series database.
 
 ### 2. 安装说明：
 * 安装依赖的库（需要 sudoer 权限）：
+```
     yum install autoconf cmake automake libtool gcc-c++
+```
 * 编译 tsdb 依赖的 library：
+```
     make libs
+```
 * 编译tsdb：
+```
     make all
+```
 * 安装tsdb（需要 sudoer 权限）：
+```
     make install
+```
 * 安装完毕。
 
 ### 3. 简单启动说明：
 #### 1. 以单机模式（SINGLE）启动：
 * 在 config.json 中指定工作目录、日志目录以及日志文件名，默认为：
+```
     "node_type": "SINGLE"
     ...
     "work_path": "./var"
     "log_path": "./var/logs"
     "log_file": "access"
+```
 * 要保证上面的目录都存在：
+```
     mkdir ./var
     mkdir ./var/logs
+```
 * 启动 tsdb：
+```
    ./tsdb_start.sh 
+```
 * 经过上面的步骤，tsdb 已经启动了，如果需要详细配置，请看4。
 
 #### 2. 以集群模式（CLUSTER）启动：
@@ -66,7 +80,9 @@ tsdb: time series database.
 *
 ```
 * 启动 tsdb：
+```
     ./tsdb_start.sh
+```
 * 完毕。
 
 ### 4. 配置文件说明：
