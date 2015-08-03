@@ -23,11 +23,7 @@ tsdb: time series database.
 
 ### 2. 安装说明：
 * 安装依赖的库（需要 sudoer 权限）：
-    yum install autoconf
-    yum install cmake
-    yum install automake
-    yum install libtool
-    yum install gcc-c++
+    yum install autoconf cmake automake libtool gcc-c++
 * 编译 tsdb 依赖的 library：
     make libs
 * 编译tsdb：
