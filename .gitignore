@@ -1,0 +1,5 @@
+nohup.out
+lib/
+tsdb
+obj/
+var/
